@@ -1,9 +1,16 @@
 import Head from 'next/head'
+import { GetStaticPaths, GetStaticProps, GetServerSideProps } from 'next'
 import Layout from '../../components/layout'
 import Date from '../../components/date'
 import utilStyles from '../../styles/utils.module.css'
 
-export default function Post({ postData }) {
+export default function Post({ postData }: {
+  postData: {
+    title: string
+    date: string
+    contentHtml: string
+  }
+}) {
   return (
     <Layout>
       <Head>
@@ -22,7 +29,7 @@ export default function Post({ postData }) {
 
 import { getAllPostIds, getPostData } from '../../lib/posts'
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const paths = getAllPostIds()
   return {
     paths,
@@ -30,7 +37,7 @@ export async function getStaticPaths() {
   }
 }
 
-export async function getStaticProps({ params }) {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const postData = await getPostData(params.id)
   return {
     props: {
