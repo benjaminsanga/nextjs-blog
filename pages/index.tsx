@@ -17,6 +17,11 @@ export default function Home({ allPostsData }: {
     <Layout home>
       <Head>
         <title>{siteTitle}</title>
+        <link
+          rel="canonical"
+          href="https://showthecode-red.vercel.app/posts/ssg-ssr"
+          key="canonical"
+        />
       </Head>
       <section className={utilStyles.headingMd}>
         <p>
